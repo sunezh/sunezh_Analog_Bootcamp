@@ -1,0 +1,37 @@
+** sch_path: /home/sunezh/sunezh_Analog_Bootcamp/analog/schematics/tb_dc_analysis.sch
+**.subckt tb_dc_analysis
+VDD net1 GND 1.8
+VSS net2 GND 0
+VCM net4 GND 0.9
+VDIFF net3 net5 0
+R1 net3 net4 1M m=1
+R2 net5 net4 1M m=1
+x1 net1 net3 net5 VOUT net2 bootcamp_opamp
+**** begin user architecture code
+
+.op
+.control
+dc VDIFF -10m 10m 0.1m
+plot v(vout)
+print v(vout)
+.endc
+
+
+.param mc_mm_switch=0
+.param mc_pr_switch=0
+.include /home/sunezh/.volare/sky130A/libs.tech/ngspice/corners/tt.spice
+.include /home/sunezh/.volare/sky130A/libs.tech/ngspice/r+c/res_typical__cap_typical.spice
+.include /home/sunezh/.volare/sky130A/libs.tech/ngspice/r+c/res_typical__cap_typical__lin.spice
+.include /home/sunezh/.volare/sky130A/libs.tech/ngspice/corners/tt/specialized_cells.spice
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  bootcamp_opamp.sym # of pins=5
+** sym_path: /home/sunezh/sunezh_Analog_Bootcamp/analog/symbols/bootcamp_opamp.sym
+** sch_path: /home/sunezh/sunezh_Analog_Bootcamp/analog/symbols/bootcamp_opamp.sch
+.subckt bootcamp_opamp VDD V+ V- VOUT VSS
+.ends
+
+.GLOBAL GND
+.end
