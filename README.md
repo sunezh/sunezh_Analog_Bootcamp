@@ -1,4 +1,4 @@
-# UWASIC Design Template
+# Two-Stage Analog Op-Amp 
 
 A template for mixed-signal ASIC design using open-source tools, featuring automated workflows for digital, analog, and integration for TinyTapeout chip projects.
 
