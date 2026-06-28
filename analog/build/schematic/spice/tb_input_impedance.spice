@@ -1,36 +1,20 @@
-** sch_path: /home/sunezh/sunezh_Analog_Bootcamp/analog/schematics/tb_dc_analysis.sch
-**.subckt tb_dc_analysis
+** sch_path: /home/sunezh/sunezh_Analog_Bootcamp/analog/schematics/tb_input_impedance.sch
+**.subckt tb_input_impedance
+x1 net1 VOUT VIN VOUT net2 bootcamp_opamp
 VDD net1 GND 1.8
 VSS net2 GND 0
-VCM net4 GND 0.9
-VDIFF net3 net5 0
-R1 net3 net4 1M m=1
-R2 net5 net4 1M m=1
-x1 net1 net3 net5 VOUT net2 bootcamp_opamp
+VCM net3 GND 0.9
+R1 VIN net3 1T m=1
+I0 GND VIN dc 0 ac 1
 **** begin user architecture code
 
 .op
 .control
-dc VDIFF -10m 10m 0.1m
-
-* Gain
-let gain = abs(deriv(v(vout)))
-print (20 * log10(maximum(gain)))
-
-* Offset
-let target = ( maximum(v(vout)) + minimum(v(vout)) ) / 2
-meas dc offset WHEN v(vout) = target
-
-* Power
-meas dc current FIND vdd#branch WHEN v-sweep = 0
-
-* May also use:
-* op
-* print (abs(vdd#branch) * 1.8)
-
-print (1.8 * abs(current))
-
-plot vout
+op
+print v(vout)
+ac dec 100 1 1G
+meas ac zin_spec find vm(vin) at=1k
+plot vm(vin)
 .endc
 
 

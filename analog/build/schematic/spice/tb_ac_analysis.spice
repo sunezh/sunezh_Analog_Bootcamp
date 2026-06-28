@@ -1,9 +1,9 @@
-** sch_path: /home/sunezh/sunezh_Analog_Bootcamp/analog/build/schematic/tb_ac_analysis.sch
+** sch_path: /home/sunezh/sunezh_Analog_Bootcamp/analog/schematics/tb_ac_analysis.sch
 **.subckt tb_ac_analysis
 VDD net1 GND 1.8
 VSS net2 GND 0
 VCM net4 GND 0.9
-VDIFF net3 net5 dc 0 ac 1
+VDIFF net3 net5 dc -0.001234496 ac 1
 R1 net3 net4 1M m=1
 R2 net5 net4 1M m=1
 x1 net1 net3 net5 VOUT net2 bootcamp_opamp
@@ -11,7 +11,18 @@ x1 net1 net3 net5 VOUT net2 bootcamp_opamp
 
 .op
 .control
+* Check Operating Point
+op
+print v(vout)
 ac dec 100 1 1G
+
+* 3 dB bandwidth
+let target = maximum(vdb(vout)) - 3
+meas ac bandwidth WHEN vdb(vout) = target
+
+* GBW Product
+meas ac gbw WHEN vdb(vout) = 0
+
 plot vdb(vout)
 .endc
 
@@ -43,9 +54,9 @@ XM3 net1 net1 VDD VDD sky130_fd_pr__pfet_01v8 L=1 W=4 nf=1 ad='int((nf+1)/2) * W
 + ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
 XM4 net2 net1 VDD VDD sky130_fd_pr__pfet_01v8 L=1 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
-XM5 net3 net4 VSS VSS sky130_fd_pr__nfet_01v8 L=0.5 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
+XM5 net3 net4 VSS VSS sky130_fd_pr__nfet_01v8 L=2 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
-XM6 net4 net4 VSS VSS sky130_fd_pr__nfet_01v8 L=0.5 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
+XM6 net4 net4 VSS VSS sky130_fd_pr__nfet_01v8 L=2 W=4 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
 XM8 VOUT net4 VSS VSS sky130_fd_pr__nfet_01v8 L=0.5 W=2 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1

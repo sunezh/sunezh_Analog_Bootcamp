@@ -32,7 +32,7 @@ C {devices/vsource.sym} -310 -40 0 0 {name=VDD value=1.8 savecurrent=false}
 C {devices/vsource.sym} -230 -40 0 0 {name=VSS value=0 savecurrent=false}
 C {devices/gnd.sym} -310 50 0 0 {name=l1 lab=GND}
 C {devices/vsource.sym} -170 180 0 0 {name=VCM value=0.9 savecurrent=false}
-C {devices/vsource.sym} -120 -30 3 0 {name=VDIFF value="dc 0 ac 1" savecurrent=false}
+C {devices/vsource.sym} -120 -30 3 0 {name=VDIFF value="dc -0.001234496 ac 1" savecurrent=false}
 C {devices/res.sym} -170 20 0 0 {name=R1
 value=1M
 footprint=1206
@@ -43,11 +43,22 @@ value=1M
 footprint=1206
 device=resistor
 m=1}
-C {devices/code_shown.sym} 100 -10 0 0 {name=s1 only_toplevel=false value=".op
+C {devices/code_shown.sym} 30 0 0 0 {name=s1 only_toplevel=false value=".op
 .control
+* Check Operating Point
+op
+print v(vout)
 ac dec 100 1 1G
+
+* 3 dB bandwidth
+let target = maximum(vdb(vout)) - 3
+meas ac bandwidth WHEN vdb(vout) = target
+
+* GBW Product
+meas ac gbw WHEN vdb(vout) = 0
+
 plot vdb(vout)
 .endc"}
-C {sky130_fd_pr/corner.sym} 370 -10 0 0 {name=CORNER only_toplevel=false corner=tt}
+C {sky130_fd_pr/corner.sym} 340 -160 0 0 {name=CORNER only_toplevel=false corner=tt}
 C {bootcamp_opamp.sym} 60 -120 0 0 {name=x1}
 C {devices/lab_pin.sym} 230 -150 0 1 {name=p1 sig_type=std_logic lab=VOUT}

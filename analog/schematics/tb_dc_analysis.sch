@@ -43,12 +43,29 @@ value=1M
 footprint=1206
 device=resistor
 m=1}
-C {devices/code_shown.sym} 50 100 0 0 {name=s1 only_toplevel=false value=".op
+C {devices/code_shown.sym} 20 100 0 0 {name=s1 only_toplevel=false value=".op
 .control
 dc VDIFF -10m 10m 0.1m
-plot v(vout)
-print v(vout)
+
+* Gain
+let gain = abs(deriv(v(vout)))
+print (20 * log10(maximum(gain)))
+
+* Offset
+let target = ( maximum(v(vout)) + minimum(v(vout)) ) / 2
+meas dc offset WHEN v(vout) = target
+
+* Power
+meas dc current FIND vdd#branch WHEN v-sweep = 0
+
+* May also use:
+* op
+* print (abs(vdd#branch) * 1.8)
+
+print (1.8 * abs(current))
+
+plot vout
 .endc"}
-C {sky130_fd_pr/corner.sym} 320 100 0 0 {name=CORNER only_toplevel=false corner=tt}
+C {sky130_fd_pr/corner.sym} 330 -50 0 0 {name=CORNER only_toplevel=false corner=tt}
 C {bootcamp_opamp.sym} 10 -10 0 0 {name=x1}
 C {devices/lab_pin.sym} 180 -40 0 1 {name=p1 sig_type=std_logic lab=VOUT}

@@ -104,7 +104,7 @@ model=pfet_01v8
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8.sym} -140 170 0 0 {name=M5
-L=0.5
+L=2
 W=4
 nf=1 
 mult=1
@@ -118,7 +118,7 @@ model=nfet_01v8
 spiceprefix=X
 }
 C {sky130_fd_pr/nfet_01v8.sym} -240 170 0 1 {name=M6
-L=0.5
+L=2
 W=4
 nf=1 
 mult=1
