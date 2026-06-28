@@ -31,7 +31,7 @@ C {devices/code_shown.sym} 120 130 0 0 {name=s1 only_toplevel=false value=".op
 op
 print v(vout)
 ac dec 100 1 1G
-meas ac zin_spec find vm(vin) at=1k
+meas ac zin find vm(vin) at=1k
 plot vm(vin)
 .endc"}
 C {sky130_fd_pr/corner.sym} 360 -20 0 0 {name=CORNER only_toplevel=false corner=tt}
