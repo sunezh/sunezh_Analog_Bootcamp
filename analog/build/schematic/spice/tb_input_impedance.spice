@@ -13,7 +13,7 @@ I0 GND VIN dc 0 ac 1
 op
 print v(vout)
 ac dec 100 1 1G
-meas ac zin_spec find vm(vin) at=1k
+meas ac zin find vm(vin) at=1k
 plot vm(vin)
 .endc
 
