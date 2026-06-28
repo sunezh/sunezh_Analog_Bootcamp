@@ -1,4 +1,4 @@
-<img width="505" height="350" alt="image" src="https://github.com/user-attachments/assets/eccffe23-35f1-4e5e-b2ef-a54530e336e9" /># Two-Stage Analog Op-Amp 
+# Analog Onboarding
 
 2-Stage Op-Amp Performance Summary
 =====================================
