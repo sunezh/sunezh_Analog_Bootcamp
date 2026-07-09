@@ -3,17 +3,18 @@
 x1 net1 VOUT net3 VOUT net2 bootcamp_opamp
 VDD net1 GND 1.8
 VSS net2 GND 0
-I0 VOUT GND dc 0 ac 1
 VCM net3 GND 0.9
+VTEST VOUT GND dc 0.9 ac 1
 **** begin user architecture code
 
 .op
 .control
 op
-print v(vout)
+print i(vtest)
 ac dec 100 1 1G
-meas ac zout find vm(vout) at=1k
-plot vm(vout)
+let zout_vec = 1/abs(i(vtest))
+meas ac zout find zout_vec at=1k
+plot zout_vec
 .endc
 
 
