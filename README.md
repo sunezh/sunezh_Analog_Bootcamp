@@ -2,17 +2,17 @@
 
 2-Stage Op-Amp Performance Summary
 =====================================
-DC Gain:              62.46977 dB  (Target: ≥20 dB)
+DC Gain:              62.46977 dB  (Target: ≥20 dB)  
 Input Offset:         1.234496 mV  (Target: ≤5 mV)  
-CMRR:                 49.14886 dB  (Target: ≥40 dB)
-Input Impedance:      12.41714 GΩ at 1kHz  (Target: ≥1 MΩ)
-Output Impedance:     54.01295 Ω at 1kHz (Target: ≤1 kΩ)
-Power Consumption:    0.2764247 mW  (Target: ≤5 mW)
-3dB Bandwidth:        17.34919 kHz
+CMRR:                 49.14886 dB  (Target: ≥40 dB)  
+Input Impedance:      12.41801 GΩ at 1kHz  (Target: ≥1 MΩ)  
+Output Impedance:     46.87424 Ω at 1kHz (Target: ≤1 kΩ)  
+Power Consumption:    0.2764247 mW  (Target: ≤5 mW)  
+3dB Bandwidth:        17.34919 kHz  
+  
+GBW Product:          24.76428 MHz  
 
-GBW Product:          24.76428 MHz
-
-PASS/FAIL: ___________
+PASS/FAIL: PASS
 
 ## Documentation
 
