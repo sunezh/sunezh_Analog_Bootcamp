@@ -24,19 +24,20 @@ N -160 -80 -140 -80 {lab=VOUT}
 N -160 -80 -160 40 {lab=VOUT}
 N -160 40 170 40 {lab=VOUT}
 C {bootcamp_opamp.sym} 10 -70 0 0 {name=x1}
-C {devices/code_shown.sym} 40 120 0 0 {name=s1 only_toplevel=false value=".op
+C {devices/code_shown.sym} 50 120 0 0 {name=s1 only_toplevel=false value=".op
 .control
 op
-print v(vout)
+print i(vtest)
 ac dec 100 1 1G
-meas ac zout find vm(vout) at=1k
-plot vm(vout)
+let zout_vec = 1/abs(i(vtest))
+meas ac zout find zout_vec at=1k
+plot zout_vec
 .endc"}
 C {sky130_fd_pr/corner.sym} 340 -110 0 0 {name=CORNER only_toplevel=false corner=tt}
 C {devices/vsource.sym} -380 30 0 0 {name=VDD value=1.8 savecurrent=false}
 C {devices/vsource.sym} -290 30 0 0 {name=VSS value=0 savecurrent=false}
 C {devices/gnd.sym} -380 120 0 0 {name=l1 lab=GND}
 C {devices/lab_pin.sym} 240 -100 0 1 {name=p1 sig_type=std_logic lab=VOUT}
-C {devices/isource.sym} 200 -30 0 0 {name=I0 value= "dc 0 ac 1"}
 C {devices/gnd.sym} 200 20 0 0 {name=l2 lab=GND}
 C {devices/vsource.sym} -220 150 0 0 {name=VCM value=0.9 savecurrent=false}
+C {devices/vsource.sym} 200 -30 0 0 {name=VTEST value="dc 0.9 ac 1" savecurrent=false}
